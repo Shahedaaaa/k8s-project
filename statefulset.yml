@@ -1,0 +1,25 @@
+---
+apiVersion: app/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  serviceName: "mysqldb"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-db
+  template:
+    metadata:
+      labels:
+        app: app-db
+    spec:
+      containers: 
+      - name: dbcont
+        image: shahedaa/phpapp:dbimg
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /usr/share/nginx/html
+      

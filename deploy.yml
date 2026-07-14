@@ -1,0 +1,44 @@
+---
+apiVersion: app/v1
+kind: Deployment  
+metadata:
+  name: myapp
+spec:
+  replicas: 3 
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx    
+    spec:
+      containers:
+      - name: cont1
+        image: shahedaa/phpapp:appimg
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: bankapp-config
+        - secretRef:
+            name: bankapp-db-secret
+        resources:
+          requests:
+            memory: "128Gi"
+            cpu: "100m"
+          limits:
+            memory: "256Gi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:  
+           path: /
+           port: 80 
+          InitialDelaySeconds: 30
+          PeriodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80  
+          initialDelaySeconds: 10
+          periodSeconds: 5
