@@ -25,10 +25,10 @@ spec:
             name: bankapp-db-secret
         resources:
           requests:
-            memory: "128Gi"
+            memory: "128Mi"
             cpu: "100m"
           limits:
-            memory: "256Gi"
+            memory: "256Mi"
             cpu: "200m"
         livenessProbe:
           httpGet:  
