@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: dbcont
-          image: shaikmustafa/phpapp:dbimage
+          image: shahedaa/phpapp:dbimg
 
           ports:
             - containerPort: 3306
